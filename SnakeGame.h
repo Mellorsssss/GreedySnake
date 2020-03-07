@@ -14,10 +14,10 @@ private:
 	double freq;
 public:
 	SnakeGame();
-	//void init();
 	void game();
 	void putword(SIGNAL _sig)const;
 	void showWall()const;
+	void showRecord()const;
 };
 
 SnakeGame::SnakeGame() {
@@ -29,9 +29,12 @@ void SnakeGame::game() {
 	setbkcolor(WHITE);   //set the 
 	cleardevice();       //将背景颜色刷新到窗口上
 	setfillcolor(BLACK); //设置填充的颜色为黑色，之后话填充的图形都是这个颜色
-	setbkmode(TRANSPARENT);
+	setbkmode(OPAQUE);
+	setlinecolor(WALL_COLOR);
+	settextcolor(WARNING_COLOR);
 	outtextxy(0,0, GAME_OVER_TIPS);
 	food.generate();
+	showWall();
 	while (true) {
 		Sleep(1000*0.1);
 		if (snake.move())
@@ -46,6 +49,7 @@ void SnakeGame::game() {
 			curkey = _getch();
 		}
 		snake.changedir(curkey);
+		showWall();
 	}
 }
 
@@ -60,6 +64,13 @@ void SnakeGame::putword(SIGNAL _sig)const {
 }
 
 void SnakeGame::showWall()const {
+	line(0, 0, 0, HEIGHT);
+	line(0, 0, BOARD, 0);
+	line(0, HEIGHT, BOARD, HEIGHT);
+	line(BOARD, HEIGHT, BOARD, 0);
+}
+
+void SnakeGame::showRecord()const {
 
 }
 #endif

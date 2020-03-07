@@ -8,7 +8,7 @@
 #define ROW_HEIGHT 20
 #define COL_WIDTH 20
 #define BODY_SIZE 20
-#define NR_COL (WIDTH)/(COL_WIDTH)
+#define NR_COL (640)/(COL_WIDTH)
 #define NR_ROW (HEIGHT)/(ROW_HEIGHT)
 #define INIT_LENGTH 3
 
@@ -17,7 +17,9 @@
 #define HEAD_COLOR RED
 #define BODY_COLOR BLUE
 #define FOOD_COLOR BLACK
-
+#define WALL_COLOR RED
+#define TIP_COLOR YELLOW
+#define WARNING_COLOR RED
 /*SIGNAL OF THE GAME*/
 typedef int SIGNAL;
 
