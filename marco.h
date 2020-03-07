@@ -3,7 +3,7 @@
 #define MARCO_H
 #include <graphics.h>
 /*BASIC PARAMETERS*/
-#define WIDTH 640+80
+#define WIDTH 640+120
 #define HEIGHT 480
 #define BOARD 640
 #define ROW_HEIGHT 20
@@ -14,10 +14,11 @@
 #define INIT_LENGTH 3
 #define SPECIAL_TIME 5
 #define STEPS 20
-#define NR_COLOR 5
+#define NR_COLOR 2
 #define SPECIAL_FEEDBACK 3
 #define NORMAL_FEEDBACK 1
-
+#define BASIC 0
+#define INFTY 1
 
 /*COLOR*/
 #define BK_COLOR WHITE
@@ -47,8 +48,8 @@ const int d[][2] = {
     {0,1},
     {-1,0},
     {1,0} };
-
-const COLORREF HW_COLOR[NR_COLOR] = {
+#define NR_COLOR_SUM 5
+const COLORREF HW_COLOR[NR_COLOR_SUM] = {
 	RED,GREEN,YELLOW,MAGENTA,DARKGRAY
 };
 
