@@ -9,8 +9,8 @@ using namespace std;
 char GAME_OVER_TIPS[] = "Hello World";
 class SnakeGame {
 private:
-	Snake snake;
-	Food food;
+	Snake* snake;
+	Food* food;
 	COLORREF wallcolor;
 	double freq;
 	int cnt;
@@ -28,10 +28,16 @@ SnakeGame::SnakeGame() {
 	wallcolor = HW_COLOR[RANDOM(0, NR_COLOR - 1)];
 	freq = 0.2;
 	cnt = 0;
+	snake = new Snake;
+	food = new Food;
 }
 
 void SnakeGame::reset() {
 	wallcolor = HW_COLOR[RANDOM(0, NR_COLOR - 1)];
+	delete snake;
+	delete food;
+	snake = new Snake;
+	food = new Food;
 	freq = 0.2;
 	cnt = 0;
 }
@@ -43,23 +49,22 @@ void SnakeGame::game() {
 	setbkmode(OPAQUE);
 	settextcolor(WARNING_COLOR);
 	showWall();
-	food.display(food.curpos, FOOD_COLOR);
+	food->display(food->curpos, FOOD_COLOR);
 	while (true) {
 		Sleep(1000*freq);
-		if (snake.move(wallcolor==snake.headcolor))
+		if (snake->move(wallcolor==snake->headcolor))
 		{
 			putword(GAME_OVER);
-			if (_kbhit()) {
-
-			}
+			while (!_kbhit());
+			reset();
 		}
-		food.generate();
+		food->generate();
 		char curkey='1';
 		if(_kbhit()){
 			curkey = _getch();
 		}
 		show();
-		snake.changedir(curkey);
+		snake->changedir(curkey);
 	}
 }
 
@@ -92,9 +97,9 @@ void SnakeGame::showRecord() {
 	settextcolor(TIP_COLOR);
 	outtextxy(BOARD+20, 30, "Your current score is ");
 	TCHAR record[5];
-	_stprintf_s(record, _T("%d"), snake.score);
+	_stprintf_s(record, _T("%d"), snake->score);
 	outtextxy(BOARD+40,50, record);
-	freq = 0.2-(snake.score/10)*0.05;
+	freq = 0.2-(snake->score/10)*0.05;
 	if (freq < 0)freq = 0.05;
 }
 
