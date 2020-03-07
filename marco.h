@@ -52,5 +52,4 @@ const int d[][2] = {
 const COLORREF HW_COLOR[NR_COLOR_SUM] = {
 	RED,GREEN,YELLOW,MAGENTA,DARKGRAY
 };
-
 #endif

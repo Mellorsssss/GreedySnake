@@ -7,6 +7,9 @@
 #include <iostream>
 #include <conio.h>
 using namespace std;
+bool cmp(const int& x, const int& y) {
+	return x > y;
+}
 char GAME_OVER_TIPS[] = "Hello World";
 class SnakeGame {
 private:
@@ -46,6 +49,7 @@ void SnakeGame::menu() {
 	setfillcolor(BLACK);
 	setbkmode(OPAQUE);
 	settextcolor(WARNING_COLOR);
+	loadRecord();
 	bool stay = true;
 	int cursor = 0;
 	while (stay) {
@@ -74,15 +78,22 @@ void SnakeGame::menu() {
 void SnakeGame::reset() {
 	wallcolor = HW_COLOR[RANDOM(0, NR_COLOR - 1)];
 	int tem = snake->score;
-	delete snake;
-	delete food;
-	snake = new Snake;
 	freq = 0.2;
 	wallcnt = 0;
 	if (mode == INFTY) {
+		delete snake;
+		delete food;
+		snake = new Snake;
 		snake->score = tem;
 	}
 	else {
+		for (int i = 0; i < snake->body.size(); i++) {
+			Snake::vis[snake->body[i].first][snake->body[i].second] = NONE;
+		}
+		Snake::vis[food->curpos.first][food->curpos.second] = NONE;
+		delete snake;
+		delete food;
+		snake = new Snake;
 		cleardevice();
 	}
 	food = new Food;
@@ -101,10 +112,18 @@ void SnakeGame::game() {
 		Sleep(1000*freq);
 		if (snake->move(wallcolor==snake->headcolor))
 		{
-			if(mode==BASIC)
+			if (mode == BASIC)
+			{
 				putword(GAME_OVER);
+				basic_record.push_back(snake->score);
+				outputRecord();
+			}
+			else {
+				infty_record.push_back(snake->score);
+				outputRecord();
+			}
 			while (!_kbhit());
-			reset();
+				reset();
 		}
 		food->generate();
 		char curkey='1';
@@ -150,23 +169,36 @@ void SnakeGame::loadRecord() {
 		cin >> t;
 		basic_record.push_back(t);
 	}
-	sort(basic_record.begin(), basic_record.end());
+	sort(basic_record.begin(), basic_record.end(),cmp);
 	for (int  i = 0; i < 5; i++)
 	{
 		cin >> t;
 		infty_record.push_back(t);
 	}
-	sort(infty_record.begin(), infty_record.end());
+	sort(infty_record.begin(), infty_record.end(),cmp);
+}
+
+void SnakeGame::outputRecord() {
+	freopen("data.txt", "w", stdout);
+	sort(basic_record.begin(), basic_record.end(),cmp);
+	sort(infty_record.begin(), infty_record.end(),cmp);
+	for (int i = 0; i <5; i++) {
+		cout << basic_record[i] << endl;
+	}
+	for (int i = 0; i <5; i++)
+	{
+		cout << infty_record[i]<<endl;
+	}
 }
 
 void SnakeGame::showRecord() {
 	/*show the current score*/
-	loadRecord();
 	settextcolor(RED);
 	outtextxy(BOARD+10, 30, "<SCORE>");
 	TCHAR r[5];
 	_stprintf_s(r, _T("%d"), snake->score);
 	outtextxy(BOARD+40,50, r);
+
 	/*set the speed according to the current score*/
 	freq = 0.2-(snake->score/10)*0.05;
 	if (freq <=0.05 )freq = 0.08;

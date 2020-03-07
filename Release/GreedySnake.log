@@ -1,0 +1,10 @@
+﻿  GreadySnake.cpp
+c:\users\联想\source\repos\greedysnake\greedysnake\greadysnake.cpp(7): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+c:\users\联想\source\repos\greedysnake\greedysnake\greadysnake.cpp(121): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+c:\users\联想\source\repos\greedysnake\greedysnake\greadysnake.cpp(160): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+  正在生成代码
+  11 of 251 functions ( 4.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    3 functions had inline decision re-evaluated but remain unchanged
+  已完成代码的生成
+  GreedySnake.vcxproj -> C:\Users\联想\source\repos\GreedySnake\Release\GreedySnake.exe

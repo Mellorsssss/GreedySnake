@@ -1,4 +1,5 @@
 ﻿  main.cpp
-c:\users\联想\source\repos\greedysnake\greedysnake\snakegame.h(100): warning C4244: “参数”: 从“double”转换到“DWORD”，可能丢失数据
-c:\users\联想\source\repos\greedysnake\greedysnake\snakegame.h(132): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+c:\users\联想\source\repos\greedysnake\greedysnake\snakegame.h(90): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\联想\source\repos\greedysnake\greedysnake\snakegame.h(112): warning C4244: “参数”: 从“double”转换到“DWORD”，可能丢失数据
+c:\users\联想\source\repos\greedysnake\greedysnake\snakegame.h(152): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
   GreedySnake.vcxproj -> C:\Users\联想\source\repos\GreedySnake\Debug\GreedySnake.exe
