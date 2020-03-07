@@ -16,10 +16,4 @@ The first work of Advanced Programming course.
 - show the socre timely
 - special food
 
-
-
-
-
-## TODO:
-
 - record the history of scores
