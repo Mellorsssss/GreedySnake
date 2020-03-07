@@ -11,45 +11,55 @@ class SnakeGame {
 private:
 	Snake snake;
 	Food food;
+	COLORREF wallcolor;
 	double freq;
+	int cnt;
 public:
 	SnakeGame();
 	void game();
 	void putword(SIGNAL _sig)const;
-	void showWall()const;
-	void showRecord()const;
+	void show();
+	void showWall();
+	void showRecord();
+	void reset();
 };
 
 SnakeGame::SnakeGame() {
-	freq = 0.1;
+	wallcolor = HW_COLOR[RANDOM(0, NR_COLOR - 1)];
+	freq = 0.2;
+	cnt = 0;
 }
 
+void SnakeGame::reset() {
+	wallcolor = HW_COLOR[RANDOM(0, NR_COLOR - 1)];
+	freq = 0.2;
+	cnt = 0;
+}
 void SnakeGame::game() {
 	initgraph(1000, 1000);
-	setbkcolor(WHITE);   //set the 
-	cleardevice();       //将背景颜色刷新到窗口上
-	setfillcolor(BLACK); //设置填充的颜色为黑色，之后话填充的图形都是这个颜色
+	setbkcolor(WHITE);   
+	cleardevice();       
+	setfillcolor(BLACK); 
 	setbkmode(OPAQUE);
-	setlinecolor(WALL_COLOR);
 	settextcolor(WARNING_COLOR);
-	outtextxy(0,0, GAME_OVER_TIPS);
-	food.generate();
 	showWall();
+	food.display(food.curpos, FOOD_COLOR);
 	while (true) {
-		Sleep(1000*0.1);
-		if (snake.move())
+		Sleep(1000*freq);
+		if (snake.move(wallcolor==snake.headcolor))
 		{
-			cout << "you lose" << endl;
 			putword(GAME_OVER);
-			system("pause");
+			if (_kbhit()) {
+
+			}
 		}
-		if (Snake::vis[food.curpos.first][food.curpos.second] == NONE)food.generate();
+		food.generate();
 		char curkey='1';
 		if(_kbhit()){
 			curkey = _getch();
 		}
+		show();
 		snake.changedir(curkey);
-		showWall();
 	}
 }
 
@@ -57,20 +67,40 @@ void SnakeGame::putword(SIGNAL _sig)const {
 	switch (_sig)
 	{
 	case GAME_OVER:
-		outtextxy(CENTRAL_AREA, "over"); break;
+		settextcolor(WARNING_COLOR);
+		outtextxy(CENTRAL_AREA, "GAMEOVER!"); break;
 	default:
 		break;
 	}
 }
 
-void SnakeGame::showWall()const {
+void SnakeGame::showWall() {
+	cnt++;
+	if (cnt >= 20) { 
+		srand(time(NULL));
+		wallcolor = HW_COLOR[RANDOM(0, NR_COLOR - 1)];
+		cnt = 0;
+	}
+	setlinecolor(wallcolor);
 	line(0, 0, 0, HEIGHT);
 	line(0, 0, BOARD, 0);
 	line(0, HEIGHT, BOARD, HEIGHT);
 	line(BOARD, HEIGHT, BOARD, 0);
 }
 
-void SnakeGame::showRecord()const {
-
+void SnakeGame::showRecord() {
+	settextcolor(TIP_COLOR);
+	outtextxy(BOARD+20, 30, "Your current score is ");
+	TCHAR record[5];
+	_stprintf_s(record, _T("%d"), snake.score);
+	outtextxy(BOARD+40,50, record);
+	freq = 0.2-(snake.score/10)*0.05;
+	if (freq < 0)freq = 0.05;
 }
+
+void SnakeGame::show() {
+	showWall();
+	showRecord();
+}
+
 #endif
