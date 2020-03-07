@@ -120,6 +120,7 @@
     <ClInclude Include="SnakeGame.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GreadySnake.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
