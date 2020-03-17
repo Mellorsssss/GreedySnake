@@ -1,14 +1,19 @@
-﻿  SnakeGame.cpp
+﻿  GreadySnake.cpp
+c:\users\联想\source\repos\greedysnake\greedysnake\greadysnake.cpp(8): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+c:\users\联想\source\repos\greedysnake\greedysnake\greadysnake.cpp(148): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+c:\users\联想\source\repos\greedysnake\greedysnake\greadysnake.cpp(200): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+  SnakeGame.cpp
 c:\users\联想\source\repos\greedysnake\greedysnake\snakegame.cpp(63): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
 c:\users\联想\source\repos\greedysnake\greedysnake\snakegame.cpp(67): warning C4244: “参数”: 从“double”转换到“DWORD”，可能丢失数据
 c:\users\联想\source\repos\greedysnake\greedysnake\snakegame.cpp(165): warning C4244: “参数”: 从“double”转换到“DWORD”，可能丢失数据
 c:\users\联想\source\repos\greedysnake\greedysnake\snakegame.cpp(183): warning C4244: “参数”: 从“double”转换到“DWORD”，可能丢失数据
 c:\users\联想\source\repos\greedysnake\greedysnake\snakegame.cpp(204): warning C4805: “!=”: 在操作中将类型“int”与类型“bool”混合不安全
-c:\users\联想\source\repos\greedysnake\greedysnake\snakegame.cpp(229): warning C4101: “_ch”: 未引用的局部变量
-c:\users\联想\source\repos\greedysnake\greedysnake\snakegame.cpp(287): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+c:\users\联想\source\repos\greedysnake\greedysnake\snakegame.cpp(232): warning C4101: “_ch”: 未引用的局部变量
+c:\users\联想\source\repos\greedysnake\greedysnake\snakegame.cpp(290): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+  main.cpp
   正在生成代码
-  2 of 252 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+  14 of 254 functions ( 5.5%) were compiled, the rest were copied from previous compilation.
+    4 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
   已完成代码的生成
   GreedySnake.vcxproj -> C:\Users\联想\source\repos\GreedySnake\Release\GreedySnake.exe

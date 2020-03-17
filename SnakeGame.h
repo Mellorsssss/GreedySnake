@@ -26,11 +26,6 @@ private:
 	int wallcnt;                            //the parameter the wall needs
 	int mode;
 
-public:
-	SnakeGame();
-	void menu();                     //show the start menu
-	void game();                     //the main loop
-	void putword(SIGNAL _sig) const; //put the words to the screen
 	void show();                     //show the wall,record and so on
 	void showWall();
 	void showRecord();
@@ -39,6 +34,12 @@ public:
 	void outputRecord();    //output the current record to the local
 	void showMenu(int pos); //show the menu
 	void reset();           //reset the game,has 'infty' mode and the 'basic' mode
+	void putword(SIGNAL _sig) const; //put the words to the screen
+public:
+	SnakeGame();
+	void menu();                     //show the start menu
+	void game();                     //the main loop
+
 };
 
 #endif

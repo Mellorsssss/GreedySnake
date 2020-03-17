@@ -44,6 +44,7 @@ typedef int SIGNAL;
 #define GO_ON 3
 #define CLEAR 4
 #define CENTRAL_AREA 200,240
+#define PAUSE_AREA 650,400
 typedef int STATUS;
 #define NONE 0
 #define BODY_IN 1

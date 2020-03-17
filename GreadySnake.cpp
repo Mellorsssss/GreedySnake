@@ -217,3 +217,11 @@ void Food::generate()
 	else
 		display(curpos, FOOD_COLOR);
 }
+
+/*the func to draw
+* since the caller don't need to know the precise pos of the food,no para is needed
+*/
+void Food::draw() const
+{
+	display(curpos, FOOD_COLOR);
+}

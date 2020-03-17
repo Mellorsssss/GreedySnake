@@ -107,7 +107,7 @@ void SnakeGame::reset()
 {
 	/*reset the parameters*/
 	wallcolor = HW_COLOR[RANDOM(0, NR_COLOR - 1)];
-	int tem = snake->score;
+	int tem = snake->getscore();
 	freq = 0.2;
 	wallcnt = 0;
 	/*if we are in the INFTY mode,then the map and the score won't be reset*/
@@ -116,7 +116,7 @@ void SnakeGame::reset()
 		delete snake;
 		delete food;
 		snake = new Snake;
-		snake->score = tem;
+		snake->getscore() = tem;
 	}
 	else
 	{
@@ -156,7 +156,7 @@ void SnakeGame::game()
 	show();
 
 	/*show the food*/
-	food->display(food->curpos, FOOD_COLOR);
+	food->draw();
 
 	/*the main loop of the game*/
 	while (true)
@@ -165,12 +165,12 @@ void SnakeGame::game()
 		Sleep(1000 * freq);                             //control the fps of the game
 
 		/*move the snake*/
-		if (snake->move(wallcolor == snake->headcolor)) //true if the snake is dead
+		if (snake->move(wallcolor == snake->getheadcolor())) //true if the snake is dead
 		{
 			if (mode == BASIC)
 			{
 				putword(GAME_OVER);                   //show the gameover
-				basic_record.push_back(snake->score); //update the new score,show it and go back to the menu
+				basic_record.push_back(snake->getscore()); //update the new score,show it and go back to the menu
 				outputRecord();
 				Sleep(1000 * 2);
 				reset();
@@ -178,7 +178,7 @@ void SnakeGame::game()
 			}
 			else //in the infty mode,the game won't end
 			{
-				infty_record.push_back(snake->score); //update the score each time you died
+				infty_record.push_back(snake->getscore()); //update the score each time you died
 				outputRecord();
 				Sleep(1000 * 0.3);
 				//putword(GO_ON);//delete the output due to the print problem,will declare in the report
@@ -205,9 +205,9 @@ void SnakeGame::game()
 		{
 			/*update the score,show it and then go back to the menu*/
 			if (mode == BASIC)
-				basic_record.push_back(snake->score);
+				basic_record.push_back(snake->getscore());
 			else
-				infty_record.push_back(snake->score);
+				infty_record.push_back(snake->getscore());
 			;
 			outputRecord();
 			Sleep(1000 * 2);
@@ -215,7 +215,10 @@ void SnakeGame::game()
 			menu();
 		}
 		else
+		{
+			putword(CLEAR);//we need to clear the pause sentence
 			snake->changedir(curkey);
+		}
 	}
 }
 
@@ -254,7 +257,7 @@ void SnakeGame::putword(SIGNAL _sig) const
 		break;
 	case PAUSE:
 		settextcolor(PAUSE_COLOR);
-		outtextxy(CENTRAL_AREA, "PRESS 'P' TO CONTINUE,OR TO THE MENU.");
+		outtextxy(PAUSE_AREA, "PAUSING");
 		break;
 	case GO_ON:
 		settextcolor(PAUSE_COLOR);
@@ -262,7 +265,7 @@ void SnakeGame::putword(SIGNAL _sig) const
 		break;
 	case CLEAR:
 		settextcolor(WHITE);
-		outtextxy(CENTRAL_AREA, "                                         ");
+		outtextxy(PAUSE_AREA, "                                         ");
 		break;
 	default:
 		break;
@@ -342,11 +345,11 @@ void SnakeGame::showRecord()
 	settextcolor(RED);
 	outtextxy(BOARD + 10, 30, "<SCORE>");
 	TCHAR r[5];
-	_stprintf_s(r, _T("%d"), snake->score);
+	_stprintf_s(r, _T("%d"), snake->getscore());
 	outtextxy(BOARD + 40, 50, r);
 
 	/*set the speed according to the current score*/
-	freq = 0.2 - (snake->score / 10) * 0.05;
+	freq = 0.2 - (snake->getscore() / 10) * 0.05;
 	if (freq <= 0.05)
 		freq = 0.08;
 

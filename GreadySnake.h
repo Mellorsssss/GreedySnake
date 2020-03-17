@@ -17,9 +17,6 @@ typedef pair<int, int> pos;
 
 class Snake
 {
-	friend class SnakeGame;
-	friend class Food;
-
 private:
 	enum dir
 	{
@@ -33,32 +30,31 @@ private:
 	void display(int i, COLORREF color) const; //the func to draw
 	bool infty;                                //infty mode
 	int score;                                 //the score
-	static STATUS vis[NR_COL][NR_ROW];         //the status are:NONE,BODY_IN,FOOD_IN,SPECIAL_IN
+
+	bool bodycheck() const;       //true if the head hit the body
+	int foodcheck() const;        //true if the head hit the food
+	bool boundcheck(pos a) const; //true if the head hit the wall
 public:
 	Snake();
 	~Snake() {}
-	int length() const { return body.size(); }; //the length of the snake
-	bool bodycheck() const;                     //true if the head hit the body
-	int foodcheck() const;                      //true if the head hit the food
-	bool boundcheck(pos a) const;               //true if the head hit the wall
-	bool move(bool ok);                         //move the snake due to the cur dir,return true if the snake is dead now
-	void changedir(char c);                     //set the cur dir by decoding the keycode
+	static STATUS vis[NR_COL][NR_ROW];                  //the status are:NONE,BODY_IN,FOOD_IN,SPECIAL_IN
+	bool move(bool ok);                                 //move the snake due to the cur dir,return true if the snake is dead now
+	void changedir(char c);                             //set the cur dir by decoding the keycode
+	int& getscore()  { return score; }                  //get the cur score,since the score can be changed,use 'int &'
+	COLORREF getheadcolor() const { return headcolor; } //get the cur headcolor
 };
 
 class Food
 {
-	friend class SnakeGame;
-	friend class Snake;
-
 private:
-	pos curpos; //the only food's pos
-	int cnt;    //the num of food has appeared
-	int count;  //the timeout of the 'ChangeColor food'
-
+	pos curpos;                                            //the only food's pos
+	int cnt;                                               //the num of food has appeared
+	int count;                                             //the timeout of the 'ChangeColor food'
+	bool isSpecial() { return (cnt % SPECIAL_TIME == 0); } //judge if the cur food is the 'ChangeColor food'
+	void display(pos _pos, COLORREF color) const;          //draw the food
 public:
 	Food();
 	~Food() {}
-	void display(pos _pos, COLORREF color) const;          //draw the body
-	void generate();                                       //generate the new food if possible
-	bool isSpecial() { return (cnt % SPECIAL_TIME == 0); } //judge if the cur food is the 'ChangeColor food'
+	void generate();                      //generate the new food if possible
+	void draw() const;                    //draw the food by the caller
 };
