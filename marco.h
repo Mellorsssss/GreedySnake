@@ -19,7 +19,9 @@
 #define NORMAL_FEEDBACK 1
 #define BASIC 0
 #define INFTY 1
-
+#define WALL_WIDTH 6
+#define CONTINUE true
+#define BACK_TO_MENU false
 /*COLOR*/
 #define BK_COLOR WHITE
 //#define HEAD_COLOR RED
@@ -29,12 +31,19 @@
 #define WALL_COLOR RED
 #define TIP_COLOR GREEN
 #define WARNING_COLOR RED
+#define PAUSE_COLOR BLUE
+#define TITLE_COLOR (0,49,79)
+#define BASIC_COLOR  (38,188,213)
+#define INFTY_COLOR (78,29,76)
+
 /*SIGNAL OF THE GAME*/
 typedef int SIGNAL;
 
 #define GAME_OVER 1
 #define PAUSE 2
-#define CENTRAL_AREA 320,240
+#define GO_ON 3
+#define CLEAR 4
+#define CENTRAL_AREA 200,240
 typedef int STATUS;
 #define NONE 0
 #define BODY_IN 1
