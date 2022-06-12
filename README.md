@@ -1,19 +1,13 @@
-# GreedySnake
-The first work of Advanced Programming course. 
+### GreedySnake
 
+GreedySnake is a simple and naive game(it is actually my homework in Advanced Programming in C++), enjoy this!
 
+### Build
 
-## Game Rules 
+Since GreedySnake is developed under VS, you shoould build it with VS.
 
-- **Basic Mode:**The head of snake and the wall have their colors.Once their colors are the same,the snake can move through the wall.
-- **Infty Mode**:When the snake hit itself or the wall,it can restart--however,the 'body' will be in the place it died.
+### How to play?
 
-
-
-## Already Done
-
-- the framework of whole game
-- show the socre timely
-- special food
-
-- record the history of scores
+There are two game modes in GreedySnake:
+- **Basic Mode**: The head of snake and the wall have their colors.Once their colors are the same,the snake can move through the wall.
+- **Infty Mode**: When the snake hit itself or the wall,it can restart--however,the 'body' will be in the place it died.
