@@ -1,4 +1,5 @@
 ### GreedySnake
+---
 
 GreedySnake is a simple and naive game(it is actually my homework in Advanced Programming in C++), enjoy this!
 
